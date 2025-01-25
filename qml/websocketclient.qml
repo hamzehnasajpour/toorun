@@ -12,7 +12,8 @@ Window {
     WebSocket {
         id: socket
         onTextMessageReceived: {
-            receiveTextArea.text = receiveTextArea.text + "\nReceived message: " + message
+            receiveTextArea.text += Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
+                                    " - Received message: " + message + "\n\n";
         }
         onStatusChanged: {
             if (socket.status == WebSocket.Open) {
@@ -45,6 +46,7 @@ Window {
             }
             TextField {
                 id: ipField
+                text: qsTr("ws://192.168.1.1:1234")
                 placeholderText: qsTr("ws://192.168.1.1:1234")
                 width: 400
             }
