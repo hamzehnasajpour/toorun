@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/main.qml</file>
         <file>qml/websocketclient.qml</file>
         <file>qml/websocketserver.qml</file>
     </qresource>

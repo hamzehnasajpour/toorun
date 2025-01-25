@@ -13,9 +13,10 @@ Window {
         id: socket
         onTextMessageReceived: {
             receiveTextArea.text += Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
-                                    " - Received message: " + message + "\n\n";
+                                    " - Received message: " + message + "\n";
         }
         onStatusChanged: {
+            console.log("websocketclient onStatusChanged:" + socket.status)
             if (socket.status == WebSocket.Open) {
                 sendButton.enabled=true;
                 connectionButton.text="Disconnect";
@@ -29,6 +30,10 @@ Window {
                 }
             }
         }
+        onErrorStringChanged: {
+            console.log("websocketclient onStatusChanged:" + errorString)
+        }
+
         active: false
     }
 
@@ -46,6 +51,7 @@ Window {
             }
             TextField {
                 id: ipField
+                readOnly: (socket.status == WebSocket.Open)
                 text: qsTr("ws://192.168.1.1:1234")
                 placeholderText: qsTr("ws://192.168.1.1:1234")
                 width: 400
