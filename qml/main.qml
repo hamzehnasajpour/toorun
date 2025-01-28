@@ -12,29 +12,46 @@ ApplicationWindow {
     signal buttonClicked(string message)
 
     property int buttonWidth: 200
-    Column {
-        x: 5
-        y: 5
-        width: parent.width - 10
-        height: parent.height
-        spacing: 10
-        anchors.margins: 5
 
-        Button {
-            width: buttonWidth
-            anchors.centerIn: parent.Center
-            text: "Websocket Client"
-            onClicked: {
-                buttonClicked("websocketclient");
+    Column {
+        height: implicitHeight
+        anchors.centerIn: parent
+        spacing: 10
+
+        Row {
+            spacing: 10
+            Button {
+                width: buttonWidth
+                text: "Websocket Client"
+                onClicked: {
+                    buttonClicked("websocketclient");
+                }
+            }
+
+            Button {
+                width: buttonWidth
+                text: "Websocket Server"
+                onClicked: {
+                    buttonClicked("websocketserver");
+                }
             }
         }
 
-        Button {
-            width: buttonWidth
-            anchors.centerIn: parent.Center
-            text: "Websocket Server"
-            onClicked: {
-                buttonClicked("websocketserver");
+        Row {
+            spacing: 10
+            Button {
+                width: buttonWidth
+                text: "Multicast Receiver"
+                onClicked: {
+                    buttonClicked("multicastreceiver");
+                }
+            }
+            Button {
+                width: buttonWidth
+                text: "Multicast Sender"
+                onClicked: {
+                    buttonClicked("multicastsender");
+                }
             }
         }
     }

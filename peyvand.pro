@@ -1,11 +1,12 @@
 TEMPLATE = app
 
-QT += qml quick websockets
+QT += qml quick websockets network
 
 CONFIG += c++11
 
 SOURCES += src/main.cpp \ 
-    src/Application.cpp
+    src/Application.cpp \
+    src/Multicast.cpp
 
 RESOURCES += qml.qrc
 
@@ -13,4 +14,5 @@ RESOURCES += qml.qrc
 QML_IMPORT_PATH = 
 
 HEADERS += \
-    src/Application.h
+    src/Application.h \
+    src/Multicast.h

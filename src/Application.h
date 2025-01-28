@@ -10,9 +10,6 @@ public:
 
 public slots:
     void openWindow(const QString &window);
-    QString version();
-    QString applicationName();
-    QString applicationExecutableName();
 };
 
 #endif // APPLICATION_H
