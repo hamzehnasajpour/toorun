@@ -3,10 +3,8 @@ import QtQuick.Controls 1.4
 import QtQuick.Window 2.2
 import Qt.WebSockets 1.0
 
-Window {
+GwWindow {
     id: mainWindow
-    visible: true
-    visibility: Window.Maximized
     title: qsTr("Websocket Server")
 
     function appendToReceived(message) {

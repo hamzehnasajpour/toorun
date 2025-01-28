@@ -3,10 +3,8 @@ import QtQuick.Controls 1.4
 import QtQuick.Window 2.2
 import Qt.WebSockets 1.0
 
-Window {
+GwWindow {
     id: mainWindow
-    visible: true
-    visibility: Window.Maximized
     title: qsTr("Websocket Client")
 
     WebSocket {
@@ -52,8 +50,8 @@ Window {
             TextField {
                 id: ipField
                 readOnly: (socket.status == WebSocket.Open)
-                text: qsTr("ws://192.168.1.1:1234")
-                placeholderText: qsTr("ws://192.168.1.1:1234")
+                text: qsTr("ws://127.0.0.1:1234/")
+                placeholderText: qsTr("ws://127.0.0.1:1234/")
                 width: 400
             }
             Button {

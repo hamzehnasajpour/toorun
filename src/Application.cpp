@@ -2,10 +2,6 @@
 #include <QQmlApplicationEngine>
 #include <QDebug>
 
-#define APP_VER "1.0"
-#define APP_NAME "Peyvand"
-#define APP_EXE_NAME "peyvand"
-
 void Application::openWindow(const QString &window){
     QString qmlFile = "qrc:/qml/main.qml";
     bool mainWindow = true;
@@ -15,6 +11,12 @@ void Application::openWindow(const QString &window){
     } else if (window == "websocketclient") {
         mainWindow = false;
         qmlFile = "qrc:/qml/websocketclient.qml";
+    } else if (window == "multicastreceiver") {
+        mainWindow = false;
+        qmlFile = "qrc:/qml/multicastreceiver.qml";
+    } else if (window == "multicastsender") {
+        mainWindow = false;
+        qmlFile = "qrc:/qml/multicastsender.qml";
     }
     qDebug() << "Opening window: " << qmlFile;
     
@@ -25,16 +27,4 @@ void Application::openWindow(const QString &window){
         QObject::connect(rootObject, SIGNAL(buttonClicked(QString)),
                          this,SLOT(openWindow(QString)));
     }
-}
-
-QString Application::version(){
-    return APP_VER;
-}
-
-QString Application::applicationName(){
-    return APP_NAME;
-}
-
-QString Application::applicationExecutableName(){
-    return APP_EXE_NAME;
 }
