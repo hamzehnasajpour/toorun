@@ -10,8 +10,8 @@ GwWindow {
     WebSocket {
         id: socket
         onTextMessageReceived: {
-            receiveTextArea.text += Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
-                                    " - Received message: " + message + "\n";
+            receiveTextArea.text = Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
+                                    " - Received message: " + message + "\n" + receiveTextArea.text;
         }
         onStatusChanged: {
             console.log("websocketclient onStatusChanged:" + socket.status)
@@ -32,7 +32,16 @@ GwWindow {
             console.log("websocketclient onStatusChanged:" + errorString)
         }
 
-        active: false
+        active: true
+    }
+
+    Timer {
+        // workaround to fix the issue for the first connection
+        id: resetTimer
+        interval: 500 // 500ms
+        running: false
+        repeat: false
+        onTriggered: socket.active = false
     }
 
     Column {
@@ -58,11 +67,11 @@ GwWindow {
                 id: connectionButton
                 text: (socket.status == WebSocket.Open)?qsTr("Disconnect"):qsTr("Connect")
                 onClicked: {
-                    socket.url = ipField.text
+                    socket.url = ipField.text;
                     if(socket.status == WebSocket.Open)
-                        socket.active = false
+                        socket.active = !socket.active;
                     else
-                        socket.active = true
+                        socket.active = true;
                 }
             }
         }
