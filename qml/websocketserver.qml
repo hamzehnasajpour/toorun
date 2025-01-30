@@ -8,8 +8,8 @@ GwWindow {
     title: qsTr("Websocket Server")
 
     function appendToReceived(message) {
-        receiveTextArea.text += Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
-                                " - " + message + "\n";
+        receiveTextArea.text = Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
+                                " - " + message + "\n" + receiveTextArea.text;
     }
 
     WebSocketServer {
