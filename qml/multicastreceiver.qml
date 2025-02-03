@@ -2,7 +2,7 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Window 2.2
 import Qt.WebSockets 1.0
-import gw.peyvand.multicast 1.0
+import gw.siosepol.multicast 1.0
 
 GwWindow {
     id: mainWindow
