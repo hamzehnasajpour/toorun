@@ -15,7 +15,8 @@ GwWindow {
 
     function appendToReceived(message) {
         receiveTextArea.text = Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
-                                " - " + message + "\n" + receiveTextArea.text;
+                                " - " + (hexCheckBox.checked?hexToString(message):message) +
+                                "\n" + receiveTextArea.text;
     }
 
     Column {
@@ -34,7 +35,7 @@ GwWindow {
                 id: ipField
                 placeholderText: qsTr("239.2.1.1")
                 text: qsTr("239.2.1.1")
-                width: 400
+                width: 200
             }
             Text {
                 text: "Port:"
@@ -44,6 +45,11 @@ GwWindow {
                 placeholderText: qsTr("2054")
                 text: qsTr("2054")
                 width: 100
+            }
+            CheckBox {
+                id: hexCheckBox
+                text: "Show As HEX"
+                checked: false
             }
             Button {
                 id: connectionButton

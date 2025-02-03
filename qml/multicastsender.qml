@@ -28,7 +28,7 @@ GwWindow {
                 id: ipField
                 placeholderText: qsTr("239.2.1.1")
                 text: qsTr("239.2.1.1")
-                width: 400
+                width: 200
             }
             Text {
                 text: "Port:"
@@ -39,11 +39,18 @@ GwWindow {
                 text: qsTr("2054")
                 width: 100
             }
+            CheckBox {
+                id: hexCheckBox
+                text: "Send As HEX"
+                checked: false
+            }
             Button {
                 id: sendButton
                 text: qsTr("Send")
                 onClicked: {
-                    multicastSender.sendDatagram(ipField.text, parseInt(portField.text), sendTextArea.text)
+                    multicastSender.sendDatagram(ipField.text, parseInt(portField.text),
+                                    (hexCheckBox.checked?stringToHex(sendTextArea.text):
+                                                         sendTextArea.text));
                 }
             }
         }

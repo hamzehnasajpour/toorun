@@ -18,9 +18,9 @@ GwWindow {
         port: 1234
         onClientConnected: {
             webSocket.onTextMessageReceived.connect(function(message) {
-                appendToReceived(qsTr("Server received message: %1").arg(message));
+                appendToReceived(qsTr("Server received message: %1").arg(showAsHex.checked?hexToString(message):message));
                 if(sendTextArea.text)
-                    webSocket.sendTextMessage(sendTextArea.text);
+                    webSocket.sendTextMessage(sendAsHex.checked?stringToHex(sendTextArea.text):sendTextArea.text);
             });
         }
         onErrorStringChanged: {
@@ -68,6 +68,11 @@ GwWindow {
 
         Row {
             spacing: 10
+            CheckBox {
+                id: sendAsHex
+                text: "Send as HEX"
+                checked: false
+            }
             Button {
                 text: qsTr("Clear")
                 onClicked: {
@@ -83,10 +88,18 @@ GwWindow {
             height: parent.height / 2 - 75
             readOnly: true
         }
-        Button {
-            text: qsTr("Clear")
-            onClicked: {
-                receiveTextArea.text="";
+        Row {
+            spacing: 10
+            CheckBox {
+                id: showAsHex
+                text: "Receive as HEX"
+                checked: false
+            }
+            Button {
+                text: qsTr("Clear")
+                onClicked: {
+                    receiveTextArea.text="";
+                }
             }
         }
     }

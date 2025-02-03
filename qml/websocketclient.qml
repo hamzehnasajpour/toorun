@@ -11,7 +11,8 @@ GwWindow {
         id: socket
         onTextMessageReceived: {
             receiveTextArea.text = Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
-                                    " - Received message: " + message + "\n" + receiveTextArea.text;
+                                    " - Received message: " + (showAsHex.checked?hexToString(message):message) +
+                                    "\n" + receiveTextArea.text;
         }
         onStatusChanged: {
             console.log("websocketclient onStatusChanged:" + socket.status)
@@ -31,7 +32,6 @@ GwWindow {
         onErrorStringChanged: {
             console.log("websocketclient onStatusChanged:" + errorString)
         }
-
         active: true
     }
 
@@ -61,7 +61,7 @@ GwWindow {
                 readOnly: (socket.status == WebSocket.Open)
                 text: qsTr("ws://127.0.0.1:1234/")
                 placeholderText: qsTr("ws://127.0.0.1:1234/")
-                width: 400
+                width: 200
             }
             Button {
                 id: connectionButton
@@ -85,12 +85,17 @@ GwWindow {
 
         Row {
             spacing: 10
+            CheckBox {
+                id: sendAsHex
+                text: "Send As HEX"
+                checked: false
+            }
             Button {
                 id: sendButton
                 text: qsTr("Send")
                 enabled: (socket.status == WebSocket.Open)
                 onClicked: {
-                    socket.sendTextMessage(sendTextArea.text)
+                    socket.sendTextMessage(sendAsHex.checked?stringToHex(sendTextArea.text):sendTextArea.text);
                 }
             }
             Button {
@@ -108,10 +113,18 @@ GwWindow {
             height: parent.height / 2 - 75
             readOnly: true
         }
-        Button {
-            text: qsTr("Clear")
-            onClicked: {
-                receiveTextArea.text="";
+        Row {
+            spacing: 10
+            CheckBox {
+                id: showAsHex
+                text: "Show As HEX"
+                checked: false
+            }
+            Button {
+                text: qsTr("Clear")
+                onClicked: {
+                    receiveTextArea.text="";
+                }
             }
         }
     }
