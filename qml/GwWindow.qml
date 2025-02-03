@@ -9,5 +9,5 @@ Window {
     visible: true
 //    visibility: Window.Maximized
     property string applicationVersion : "1.0"
-    property string applicationName: "Peyvand"
+    property string applicationName: "Si-o-se Pol (33 arches)"
 }

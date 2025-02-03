@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
         arg = argv[1];
     }
 
-    qmlRegisterType<MulticastSender>("gw.peyvand.multicast", 1, 0, "MulticastSender");
-    qmlRegisterType<MulticastReceiver>("gw.peyvand.multicast", 1, 0, "MulticastReceiver");
+    qmlRegisterType<MulticastSender>("gw.siosepol.multicast", 1, 0, "MulticastSender");
+    qmlRegisterType<MulticastReceiver>("gw.siosepol.multicast", 1, 0, "MulticastReceiver");
 
     capp.openWindow(arg);
     return app.exec();
