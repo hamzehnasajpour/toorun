@@ -17,36 +17,42 @@ GwWindow {
         y: 5
         width: parent.width - 10
         height: parent.height
-        spacing: 10
+        spacing: 5
         anchors.margins: 5
         Row {
-            spacing: 10
+            spacing: 5
             Text {
                 text: "IP:"
+                anchors.verticalCenter: parent.verticalCenter
             }
             TextField {
                 id: ipField
                 placeholderText: qsTr("239.2.1.1")
                 text: qsTr("239.2.1.1")
+                anchors.verticalCenter: parent.verticalCenter
                 width: 200
             }
             Text {
                 text: "Port:"
+                anchors.verticalCenter: parent.verticalCenter
             }
             TextField {
                 id: portField
                 placeholderText: qsTr("2054")
                 text: qsTr("2054")
                 width: 100
+                anchors.verticalCenter: parent.verticalCenter
             }
             CheckBox {
                 id: hexCheckBox
                 text: "Send As HEX"
                 checked: false
+                anchors.verticalCenter: parent.verticalCenter
             }
             Button {
                 id: sendButton
                 text: qsTr("Send")
+                anchors.verticalCenter: parent.verticalCenter
                 onClicked: {
                     multicastSender.sendDatagram(ipField.text, parseInt(portField.text),
                                     (hexCheckBox.checked?stringToHex(sendTextArea.text):
@@ -59,7 +65,7 @@ GwWindow {
             id: sendTextArea
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            height: parent.height - 25
+            height: parent.height - 75
         }
         Button {
             text: qsTr("Clear")

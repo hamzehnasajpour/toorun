@@ -24,36 +24,42 @@ GwWindow {
         y: 5
         width: parent.width - 10
         height: parent.height
-        spacing: 10
+        spacing: 5
         anchors.margins: 5
         Row {
-            spacing: 10
+            spacing: 5
             Text {
                 text: "IP:"
+                anchors.verticalCenter: parent.verticalCenter
             }
             TextField {
                 id: ipField
                 placeholderText: qsTr("239.2.1.1")
                 text: qsTr("239.2.1.1")
+                anchors.verticalCenter: parent.verticalCenter
                 width: 200
             }
             Text {
                 text: "Port:"
+                anchors.verticalCenter: parent.verticalCenter
             }
             TextField {
                 id: portField
                 placeholderText: qsTr("2054")
                 text: qsTr("2054")
+                anchors.verticalCenter: parent.verticalCenter
                 width: 100
             }
             CheckBox {
                 id: hexCheckBox
                 text: "Show As HEX"
+                anchors.verticalCenter: parent.verticalCenter
                 checked: false
             }
             Button {
                 id: connectionButton
                 text: multicastReceiver.isConnected?qsTr("Stop"):qsTr("Listen")
+                anchors.verticalCenter: parent.verticalCenter
                 onClicked: {
                     if(multicastReceiver.isConnected)
                     {
@@ -71,7 +77,7 @@ GwWindow {
             id: receiveTextArea
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            height: parent.height - 25
+            height: parent.height - 75
             readOnly: true
         }
         Button {

@@ -19,3 +19,5 @@ Si-o-se-pol is a versatile Qt C++/QML application designed to provide seamless a
 Named after the famous Si-o-se-pol bridge, this application symbolizes the seamless integration and connectivity provided by the app. Just as the bridge facilitates movement and connection across the Zayandeh River, Si-o-se-pol bridges various communication protocols, ensuring efficient and reliable data flow.
 
 Whether you're working on network communication, embedded systems, or IoT applications, Si-o-se-pol is your go-to solution for a comprehensive and unified communication platform.
+
+# Dependencies

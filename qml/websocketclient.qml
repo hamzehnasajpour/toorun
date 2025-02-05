@@ -49,12 +49,13 @@ GwWindow {
         y: 5
         width: parent.width - 10
         height: parent.height
-        spacing: 10
+        spacing: 5
         anchors.margins: 5
         Row {
-            spacing: 10
+            spacing: 5
             Text {
                 text: "IP:"
+                anchors.verticalCenter: parent.verticalCenter
             }
             TextField {
                 id: ipField
@@ -62,10 +63,12 @@ GwWindow {
                 text: qsTr("ws://127.0.0.1:1234/")
                 placeholderText: qsTr("ws://127.0.0.1:1234/")
                 width: 200
+                anchors.verticalCenter: parent.verticalCenter
             }
             Button {
                 id: connectionButton
                 text: (socket.status == WebSocket.Open)?qsTr("Disconnect"):qsTr("Connect")
+                anchors.verticalCenter: parent.verticalCenter
                 onClicked: {
                     socket.url = ipField.text;
                     if(socket.status == WebSocket.Open)
@@ -84,16 +87,18 @@ GwWindow {
         }
 
         Row {
-            spacing: 10
+            spacing: 5
             CheckBox {
                 id: sendAsHex
                 text: "Send As HEX"
                 checked: false
+                anchors.verticalCenter: parent.verticalCenter
             }
             Button {
                 id: sendButton
                 text: qsTr("Send")
                 enabled: (socket.status == WebSocket.Open)
+                anchors.verticalCenter: parent.verticalCenter
                 onClicked: {
                     socket.sendTextMessage(sendAsHex.checked?stringToHex(sendTextArea.text):sendTextArea.text);
                 }
@@ -103,6 +108,7 @@ GwWindow {
                 onClicked: {
                     sendTextArea.text="";
                 }
+                anchors.verticalCenter: parent.verticalCenter
             }
         }
 
@@ -110,18 +116,20 @@ GwWindow {
             id: receiveTextArea
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            height: parent.height / 2 - 75
+            height: parent.height / 2 - 50
             readOnly: true
         }
         Row {
-            spacing: 10
+            spacing: 5
             CheckBox {
                 id: showAsHex
                 text: "Show As HEX"
                 checked: false
+                anchors.verticalCenter: parent.verticalCenter
             }
             Button {
                 text: qsTr("Clear")
+                anchors.verticalCenter: parent.verticalCenter
                 onClicked: {
                     receiveTextArea.text="";
                 }
