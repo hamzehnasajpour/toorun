@@ -8,22 +8,22 @@ MulticastSender::MulticastSender(QObject *parent)
 
 void MulticastSender::startSending()
 {
-    timer.start(5000);
+    m_timer.start(5000);
 }
 
 void MulticastSender::sendDatagram(QString ip, int port, QString message)
 {
-    groupAddress4 = ip,
-    udpSocket4.bind(QHostAddress(QHostAddress::AnyIPv4), port);
-    udpSocket4.setSocketOption(QAbstractSocket::MulticastTtlOption, 2);
+    m_groupAddress4 = ip,
+    m_udpSocket4.bind(QHostAddress(QHostAddress::AnyIPv4), port);
+    m_udpSocket4.setSocketOption(QAbstractSocket::MulticastTtlOption, 2);
 
     qDebug() << "MulticastSender: Ready to multicast datagrams to groups"
-             << groupAddress4.toString()
+             << m_groupAddress4.toString()
              << "on port" << port;
 
     QByteArray datagram = message.toUtf8();
-    udpSocket4.writeDatagram(datagram, groupAddress4, port);
-    udpSocket4.close();
+    m_udpSocket4.writeDatagram(datagram, m_groupAddress4, port);
+    m_udpSocket4.close();
 }
 
 MulticastReceiver::MulticastReceiver(QObject *parent)
@@ -33,13 +33,13 @@ MulticastReceiver::MulticastReceiver(QObject *parent)
 
 void MulticastReceiver::open(QString ip, int port)
 {
-    groupAddress4 = ip;
-    udpSocket4.bind(QHostAddress::AnyIPv4, port, QUdpSocket::ShareAddress);
-    udpSocket4.joinMulticastGroup(groupAddress4);
+    m_groupAddress4 = ip;
+    m_udpSocket4.bind(QHostAddress::AnyIPv4, port, QUdpSocket::ShareAddress);
+    m_udpSocket4.joinMulticastGroup(m_groupAddress4);
     qDebug() << "MulticastReceiver: Ready to receive datagrams from groups"
-             << groupAddress4.toString()
+             << m_groupAddress4.toString()
              << "on port" << port;
-    connect(&udpSocket4, &QUdpSocket::readyRead,
+    connect(&m_udpSocket4, &QUdpSocket::readyRead,
             this, &MulticastReceiver::processPendingDatagrams);
     m_isConnected = true;
     emit isConnectedChanged();
@@ -47,7 +47,7 @@ void MulticastReceiver::open(QString ip, int port)
 
 void MulticastReceiver::close()
 {
-    udpSocket4.close();
+    m_udpSocket4.close();
     m_isConnected = false;
     emit isConnectedChanged();
 }
@@ -61,10 +61,10 @@ void MulticastReceiver::processPendingDatagrams()
 {
     QByteArray datagram;
     // using QUdpSocket::readDatagram (API since Qt 4)
-    while (udpSocket4.hasPendingDatagrams()) {
-        datagram.resize(udpSocket4.pendingDatagramSize());
+    while (m_udpSocket4.hasPendingDatagrams()) {
+        datagram.resize(m_udpSocket4.pendingDatagramSize());
 //        datagram.resize(qsizetype(udpSocket4.pendingDatagramSize()));
-        udpSocket4.readDatagram(datagram.data(), datagram.size());
+        m_udpSocket4.readDatagram(datagram.data(), datagram.size());
         emit receivedDatagram(datagram);
         qDebug() << "MulticastReceiver: Received datagram: " << datagram;
     }

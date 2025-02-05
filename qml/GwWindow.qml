@@ -4,8 +4,8 @@ import QtQuick.Window 2.2
 
 Window {
     id: mainWindow
-    width: 800
-    height: 600
+    width: 1024
+    height: 768
     visible: true
 //    visibility: Window.Maximized
     property string applicationVersion : "1.0"

@@ -22,10 +22,10 @@ private slots:
     void startSending();
 
 private:
-    QUdpSocket udpSocket4;
-    QTimer timer;
-    QHostAddress groupAddress4;
-    int messageNo = 1;
+    QUdpSocket m_udpSocket4;
+    QTimer m_timer;
+    QHostAddress m_groupAddress4;
+    int m_messageNo = 1;
 };
 
 class MulticastReceiver : public QObject
@@ -49,8 +49,8 @@ signals:
     void isConnectedChanged();
 
 private:
-    QUdpSocket udpSocket4;
-    QHostAddress groupAddress4;
+    QUdpSocket m_udpSocket4;
+    QHostAddress m_groupAddress4;
     bool m_isConnected = false;
 };
 
