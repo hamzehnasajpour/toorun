@@ -1,8 +1,11 @@
 TEMPLATE = app
 
-QT += qml quick websockets network
+QT += qml quick network
+#QT += websockets
 
-CONFIG += c++11
+CONFIG += c++14
+#CONFIG += QMQTT_NO_SSL NO_UNIT_TESTS
+#DEFINES += QT_WEBSOCKETS_LIB
 
 SOURCES += src/main.cpp \ 
     src/Application.cpp \
@@ -16,3 +19,5 @@ QML_IMPORT_PATH =
 HEADERS += \
     src/Application.h \
     src/Multicast.h
+
+include(qmqtt/qmqtt.pri)

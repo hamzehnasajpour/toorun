@@ -17,6 +17,16 @@ ApplicationWindow {
         height: implicitHeight
         anchors.centerIn: parent
         spacing: 10
+        Row {
+            spacing: 10
+            Button {
+                width: 2*buttonWidth
+                text: "MQTT Publisher/Subscriber"
+                onClicked: {
+                    buttonClicked("mqttpubsub");
+                }
+            }
+        }
 
         Row {
             spacing: 10

@@ -4,6 +4,7 @@
         <file>qml/GwWindow.qml</file>
         <file>qml/websocketclient.qml</file>
         <file>qml/websocketserver.qml</file>
+        <file>qml/mqttpubsub.qml</file>
         <file>qml/multicastsender.qml</file>
         <file>qml/multicastreceiver.qml</file>
     </qresource>

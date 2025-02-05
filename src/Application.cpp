@@ -17,6 +17,9 @@ void Application::openWindow(const QString &window){
     } else if (window == "multicastsender") {
         mainWindow = false;
         qmlFile = "qrc:/qml/multicastsender.qml";
+    } else if (window == "mqttpubsub") {
+        mainWindow = false;
+        qmlFile = "qrc:/qml/mqttpubsub.qml";
     }
     qDebug() << "Opening window: " << qmlFile;
     
