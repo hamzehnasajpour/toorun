@@ -20,7 +20,7 @@ ApplicationWindow {
         Row {
             spacing: 10
             Button {
-                width: 2*buttonWidth
+                width: 2*buttonWidth + 10
                 text: "MQTT Publisher/Subscriber"
                 onClicked: {
                     buttonClicked("mqttpubsub");

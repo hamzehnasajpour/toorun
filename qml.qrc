@@ -1,11 +1,13 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/main.qml</file>
         <file>qml/GwWindow.qml</file>
         <file>qml/websocketclient.qml</file>
         <file>qml/websocketserver.qml</file>
         <file>qml/mqttpubsub.qml</file>
         <file>qml/multicastsender.qml</file>
         <file>qml/multicastreceiver.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/TreeDelegate.qml</file>
+        <file>images/siosepol.svg</file>
     </qresource>
 </RCC>
