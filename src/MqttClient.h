@@ -20,12 +20,13 @@ private slots:
     void onSubscribed(const QString &topic);
     void onReceived(const QMQTT::Message &message);
     void onError(const QMQTT::ClientError error);
+    void onPublished(const QMQTT::Message& message, quint16 msgid = 0);
 
 signals:
     void isConnectedChanged();
 
 public slots:
-    void sendMessage(const QString &topic, const QString &message);
+    void sendMessage(const QString &topic, const QByteArray &message);
     void connectToHost(const QString &host, const quint16 port, const QString &subscription);
     bool isConnected() const;
     void dataAsHex(bool asHex);

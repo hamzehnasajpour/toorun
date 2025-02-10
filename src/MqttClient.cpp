@@ -1,6 +1,6 @@
 #include "MqttClient.h"
 #include <QUrl>
-
+#include <qmqtt/src/mqtt/qmqtt_message.h>
 MqttClient::MqttClient(QObject *parent) : 
     QMQTT::Client(QHostAddress::LocalHost, 1883, parent){
 //    setAutoReconnectInterval(2000);
@@ -10,11 +10,13 @@ MqttClient::MqttClient(QObject *parent) :
     connect(this, &MqttClient::subscribed, this, &MqttClient::onSubscribed);
     connect(this, &MqttClient::received, this, &MqttClient::onReceived);
     connect(this, &MqttClient::error, this, &MqttClient::onError);
+    connect(this, &MqttClient::published, this, &MqttClient::onPublished);
 }
 
-void MqttClient::sendMessage(const QString &topic, const QString &message)
+void MqttClient::sendMessage(const QString &topic, const QByteArray &message)
 {
-    qDebug() << topic << message;
+    QMQTT::Message qmttmessage(1, topic,message);
+    publish(qmttmessage);
 }
 
 void MqttClient::onConnected()
@@ -50,6 +52,12 @@ void MqttClient::onReceived(const QMQTT::Message &message)
 void MqttClient::onError(const QMQTT::ClientError error)
 {
     qDebug() << "MessageBrokerClient::onError" << error;
+}
+
+void MqttClient::onPublished(const QMQTT::Message& message, quint16 msgid)
+{
+    Q_UNUSED(message);
+    qDebug() << "MqttClient::onPublished:" << msgid;
 }
 
 void MqttClient::setModel(MqttTreeModel *model)

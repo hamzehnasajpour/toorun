@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.2
+import QtQuick.Layouts 1.1
 
 GwWindow {
     title: qsTr("MQTT Publisher/Subscriber")
@@ -23,6 +24,7 @@ GwWindow {
                 id: ipField
                 placeholderText: qsTr("mqtt://192.168.0.54")
                 text: qsTr("mqtt://192.168.0.54")
+                enabled: !mqttClient.isConnected
                 anchors.verticalCenter: parent.verticalCenter
                 width: 200
             }
@@ -34,6 +36,7 @@ GwWindow {
                 id: portField
                 placeholderText: qsTr("1883")
                 text: qsTr("1883")
+                enabled: !mqttClient.isConnected
                 anchors.verticalCenter: parent.verticalCenter
                 width: 100
             }
@@ -45,6 +48,7 @@ GwWindow {
                 id: subscriptionField
                 placeholderText: qsTr("#")
                 text: qsTr("#")
+                enabled: !mqttClient.isConnected
                 width: 100
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -74,9 +78,58 @@ GwWindow {
                 }
             }
         }
+        Rectangle {
+            height: 1
+            color: "gray"
+            width: parent.width
+        }
+        Row {
+            spacing: 5
+            anchors.margins: 5
+            TextField {
+                id: topicFieldPublish
+                placeholderText: qsTr("topic, ex:topic1/test")
+                enabled: mqttClient.isConnected
+                width: 400
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            TextField {
+                id: messageFieldPublish
+                placeholderText: qsTr("message...")
+                enabled: mqttClient.isConnected
+                Layout.fillWidth: true
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            CheckBox {
+                id: sendAsHex
+                text: "Send As HEX"
+                checked: false
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            Button {
+                id: publishButton
+                text: qsTr("Publish")
+                enabled: mqttClient.isConnected
+                anchors.verticalCenter: parent.verticalCenter
+                Layout.preferredWidth: 80
+                Layout.preferredHeight: 40
+                onClicked: {
+                    if(topicFieldPublish.text && messageFieldPublish.text){
+                        mqttClient.sendMessage(topicFieldPublish.text,
+                                               (sendAsHex.checked?stringToHex(messageFieldPublish.text):messageFieldPublish.text));
+                    }
+                }
+            }
+        }
+        Rectangle {
+            height: 1
+            color: "gray"
+            width: parent.width
+        }
+
         TreeView {
             width: parent.width
-            height: parent.height - 50
+            height: parent.height - 150
             model: mqttTreeModel
             itemDelegate: TreeDelegate {}
 
