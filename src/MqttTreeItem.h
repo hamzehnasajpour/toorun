@@ -11,6 +11,7 @@ public:
     ~MqttTreeItem();
 
     void appendChild(MqttTreeItem *child);
+    void insert(int i, MqttTreeItem *item);
 
     MqttTreeItem *child(int row);
     int childCount() const;

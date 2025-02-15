@@ -1,6 +1,7 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Window 2.2
+import QtQuick.Layouts 1.1
 import Qt.WebSockets 1.0
 import gw.siosepol.multicast 1.0
 
@@ -12,11 +13,11 @@ GwWindow {
         id: multicastSender
     }
 
-    Column {
+    ColumnLayout {
         x: 5
         y: 5
-        width: parent.width - 10
-        height: parent.height
+        anchors.fill: parent
+
         spacing: 5
         anchors.margins: 5
         Row {
@@ -64,8 +65,8 @@ GwWindow {
         TextArea {
             id: sendTextArea
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            height: parent.height - 75
+            Layout.fillHeight: true
+            Layout.fillWidth: true
         }
         Button {
             text: qsTr("Clear")

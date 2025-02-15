@@ -2,6 +2,7 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Window 2.2
 import Qt.WebSockets 1.0
+import QtQuick.Layouts 1.1
 
 GwWindow {
     id: mainWindow
@@ -10,9 +11,8 @@ GwWindow {
     WebSocket {
         id: socket
         onTextMessageReceived: {
-            receiveTextArea.text = Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
-                                    " - Received message: " + (showAsHex.checked?hexToString(message):message) +
-                                    "\n" + receiveTextArea.text;
+            appendToReceived(message, receiveTextArea, showAsHex.checked);
+            textSizeField.text = receiveTextArea.text.length + "/" + maxTextBufferSize;
         }
         onStatusChanged: {
             console.log("websocketclient onStatusChanged:" + socket.status)
@@ -44,11 +44,10 @@ GwWindow {
         onTriggered: socket.active = false
     }
 
-    Column {
+    ColumnLayout {
         x: 5
         y: 5
-        width: parent.width - 10
-        height: parent.height
+        anchors.fill: parent
         spacing: 5
         anchors.margins: 5
         Row {
@@ -82,8 +81,8 @@ GwWindow {
         TextArea {
             id: sendTextArea
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            height: parent.height / 2 - 75
+            Layout.fillHeight: parent
+            Layout.fillWidth: parent
         }
 
         Row {
@@ -115,8 +114,8 @@ GwWindow {
         TextArea {
             id: receiveTextArea
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            height: parent.height / 2 - 50
+            Layout.fillHeight: parent
+            Layout.fillWidth: parent
             readOnly: true
         }
         Row {
@@ -133,6 +132,9 @@ GwWindow {
                 onClicked: {
                     receiveTextArea.text="";
                 }
+            }
+            Text {
+                id: textSizeField
             }
         }
     }

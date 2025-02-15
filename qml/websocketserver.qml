@@ -2,15 +2,11 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Window 2.2
 import Qt.WebSockets 1.0
+import QtQuick.Layouts 1.1
 
 GwWindow {
     id: mainWindow
     title: qsTr("Websocket Server")
-
-    function appendToReceived(message) {
-        receiveTextArea.text = Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
-                                " - " + message + "\n" + receiveTextArea.text;
-    }
 
     WebSocketServer {
         id: server
@@ -18,24 +14,23 @@ GwWindow {
         port: 1234
         onClientConnected: {
             webSocket.onTextMessageReceived.connect(function(message) {
-                appendToReceived(qsTr("Server received message: %1").arg(showAsHex.checked?hexToString(message):message));
+                appendToReceived(message, receiveTextArea, showAsHex.checked);
                 if(sendTextArea.text)
                     webSocket.sendTextMessage(sendAsHex.checked?stringToHex(sendTextArea.text):sendTextArea.text);
             });
         }
         onErrorStringChanged: {
-            appendToReceived(qsTr("Server error: %1").arg(errorString));
+            appendToReceived(qsTr("Server error: %1").arg(errorString), receiveTextArea, false);
         }
         onListenChanged: {
             connectionButton.text=server.listen?qsTr("Stop"):qsTr("Listen")
         }
     }
 
-    Column {
+    ColumnLayout {
         x: 5
         y: 5
-        width: parent.width - 10
-        height: parent.height
+        anchors.fill: parent
         spacing: 5
         anchors.margins: 5
         Row {
@@ -65,8 +60,8 @@ GwWindow {
         TextArea {
             id: sendTextArea
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            height: parent.height / 2 - 50
+            Layout.fillHeight: true
+            Layout.fillWidth: true
         }
 
         Row {
@@ -89,8 +84,8 @@ GwWindow {
         TextArea {
             id: receiveTextArea
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            height: parent.height / 2 - 75
+            Layout.fillHeight: true
+            Layout.fillWidth: true
             readOnly: true
         }
         Row {

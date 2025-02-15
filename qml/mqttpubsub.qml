@@ -6,11 +6,10 @@ import QtQuick.Layouts 1.1
 
 GwWindow {
     title: qsTr("MQTT Publisher/Subscriber")
-    Column {
+    ColumnLayout {
         x: 5
         y: 5
-        width: parent.width - 10
-        height: parent.height
+        anchors.fill: parent
         spacing: 5
         anchors.margins: 5
         Row {
@@ -90,7 +89,7 @@ GwWindow {
                 id: topicFieldPublish
                 placeholderText: qsTr("topic, ex:topic1/test")
                 enabled: mqttClient.isConnected
-                width: 400
+                Layout.fillWidth: true
                 anchors.verticalCenter: parent.verticalCenter
             }
             TextField {
@@ -128,8 +127,8 @@ GwWindow {
         }
 
         TreeView {
-            width: parent.width
-            height: parent.height - 150
+            Layout.fillHeight: true
+            Layout.fillWidth: true
             model: mqttTreeModel
             itemDelegate: TreeDelegate {}
 

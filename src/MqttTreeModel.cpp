@@ -129,8 +129,6 @@ void MqttTreeModel::addTopic(const QString &topic, const QString &message)
         m_topicsVariant[topic].value<MqttTreeType*>()->setMessage(message);
         return;
     }
-
-    emit beginInsertRows(QModelIndex(), 0, 0);
     QList<QVariant> columnData;
     QList<MqttTreeItem*> parents;
     parents << m_mqttRootTreeItem;
@@ -149,9 +147,9 @@ void MqttTreeModel::addTopic(const QString &topic, const QString &message)
     //         indentations.pop_back();
     //     }
     // }
-
+    emit beginInsertRows(QModelIndex(), 0, 0);
     // Append a new item to the current parent's list of children.
-    parents.last()->appendChild(new MqttTreeItem(columnData, parents.last()));
+    parents.last()->insert(0, new MqttTreeItem(columnData, parents.last()));
     emit endInsertRows();
 }
 

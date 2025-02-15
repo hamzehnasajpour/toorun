@@ -18,6 +18,10 @@ void MqttTreeItem::appendChild(MqttTreeItem *item)
     m_childItems.append(item);
 }
 
+void MqttTreeItem::insert(int i, MqttTreeItem *item){
+    m_childItems.insert(i, item);
+}
+
 MqttTreeItem *MqttTreeItem::child(int row)
 {
     return m_childItems.value(row);

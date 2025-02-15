@@ -6,7 +6,10 @@ import Qt.WebSockets 1.0
 ApplicationWindow {
     id: mainWindow
     visible: true
-    title: qsTr("Websocket Server")
+    property string applicationVersion : "1.0"
+    property string applicationName: "Si-o-se Pol (33 arches)"
+
+    title: applicationName + " - (" + applicationVersion + ")"
     width: 640
     height: 480
     signal buttonClicked(string message)

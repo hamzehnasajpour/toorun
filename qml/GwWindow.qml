@@ -7,9 +7,18 @@ Window {
     width: 1024
     height: 768
     visible: true
+    property int maxTextBufferSize: 10240
 //    visibility: Window.Maximized
     property string applicationVersion : "1.0"
     property string applicationName: "Si-o-se Pol (33 arches)"
+
+    function appendToReceived(message, textObject, showAsHex) {
+        var text = Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +
+                                " - Received message: " + (showAsHex?hexToString(message):message) +
+                                "\n" + textObject.text;
+
+        textObject.text=text.length > maxTextBufferSize ? text.substring(0, maxTextBufferSize) : text;
+    }
 
     function stringToHex(hexString) {
         if (hexString.length % 2 !== 0) {
