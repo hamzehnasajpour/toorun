@@ -13,7 +13,8 @@ SOURCES += src/main.cpp \
     src/MqttTreeItem.cpp \
     src/MqttTreeModel.cpp \
     src/MqttClient.cpp \
-    src/MqttTreeType.cpp
+    src/MqttTreeType.cpp \
+    src/Udp.cpp
 
 RESOURCES += qml.qrc
 
@@ -26,6 +27,7 @@ HEADERS += \
     src/MqttTreeItem.h \
     src/MqttTreeModel.h \
     src/MqttClient.h \
-    src/MqttTreeType.h
+    src/MqttTreeType.h \
+    src/Udp.h
 
 include(qmqtt/qmqtt.pri)

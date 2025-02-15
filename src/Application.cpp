@@ -14,6 +14,10 @@ void Application::openWindow(const QString &window){
         qmlFile = "qrc:/qml/websocketserver.qml";
     } else if (window == "websocketclient") {
         qmlFile = "qrc:/qml/websocketclient.qml";
+    } else if (window == "udp") {
+        qmlFile = "qrc:/qml/udp.qml";
+    } else if (window == "tcp") {
+        qmlFile = "qrc:/qml/tcp.qml";
     } else if (window == "multicastreceiver") {
         qmlFile = "qrc:/qml/multicastreceiver.qml";
     } else if (window == "multicastsender") {
@@ -24,11 +28,6 @@ void Application::openWindow(const QString &window){
 
         MqttClient *mqttClient = new MqttClient(this);
         mqttClient->setModel(mqttTreeModel);
-        // QUrl remoteUrl("mqtt://192.168.0.54");
-        // QHostAddress address(remoteUrl.host());
-        // mqttClient->setHost(address);
-        // mqttClient->setPort(40683);
-//         mqttClient->connectToHost();
         engine->rootContext()->setContextProperty("mqttClient",mqttClient);
         engine->rootContext()->setContextProperty("mqttTreeModel",mqttTreeModel);
     } else {

@@ -8,6 +8,8 @@
         <file>qml/multicastreceiver.qml</file>
         <file>qml/main.qml</file>
         <file>qml/TreeDelegate.qml</file>
+        <file>qml/udp.qml</file>
         <file>images/siosepol.svg</file>
+        <file>qml/UdpTcpWindow.qml</file>
     </qresource>
 </RCC>

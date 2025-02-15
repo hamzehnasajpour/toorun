@@ -10,6 +10,7 @@
 #include "Application.h"
 #include "Multicast.h"
 #include "MqttTreeType.h"
+#include "Udp.h"
 
 Application capp;
 
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<MulticastSender>("gw.siosepol.multicast", 1, 0, "MulticastSender");
     qmlRegisterType<MulticastReceiver>("gw.siosepol.multicast", 1, 0, "MulticastReceiver");
     qmlRegisterType<MqttTreeType>("gw.siosepol.mqtt", 1, 0, "MqttTreeType");
+    qmlRegisterType<Udp>("gw.siosepol.udp", 1, 0, "Udp");
 
     capp.openWindow(arg);
     return app.exec();

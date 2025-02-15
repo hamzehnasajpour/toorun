@@ -31,6 +31,28 @@ ApplicationWindow {
             }
         }
 
+//        Row {
+//            spacing: 10
+//            Button {
+//                width: 2*buttonWidth + 10
+//                text: "TCP Connection"
+//                onClicked: {
+//                    buttonClicked("tcp");
+//                }
+//            }
+//        }
+
+        Row {
+            spacing: 10
+            Button {
+                width: 2*buttonWidth + 10
+                text: "UDP Connection"
+                onClicked: {
+                    buttonClicked("udp");
+                }
+            }
+        }
+
         Row {
             spacing: 10
             Button {
@@ -54,16 +76,16 @@ ApplicationWindow {
             spacing: 10
             Button {
                 width: buttonWidth
-                text: "Multicast Receiver"
+                text: "Multicast Sender"
                 onClicked: {
-                    buttonClicked("multicastreceiver");
+                    buttonClicked("multicastsender");
                 }
             }
             Button {
                 width: buttonWidth
-                text: "Multicast Sender"
+                text: "Multicast Receiver"
                 onClicked: {
-                    buttonClicked("multicastsender");
+                    buttonClicked("multicastreceiver");
                 }
             }
         }
