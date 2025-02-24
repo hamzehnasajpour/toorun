@@ -2,20 +2,24 @@ import QtQuick 2.0
 import gw.siosepol.mqtt 1.0
 
 Item {
-    Text {
+    TextEdit {
         id: topicText
-        width: 400
         color: styleData.textColor
-        elide: styleData.elideMode
+//        elide: styleData.elideMode
 //        font.pointSize: 14
+        readOnly: true
+        selectByMouse: true
         text: (styleData.value?styleData.value.topic:"")
     }
-    Text {
+
+    TextEdit {
         id: messageText
-        width: 800
+        anchors.leftMargin: 40
         anchors.left: topicText.right
         color: styleData.textColor
-        elide: styleData.elideMode
+        readOnly: true
+        selectByMouse: true
+//        elide: styleData.elideMode
 //        font.pointSize: 14
         text: (styleData.value?styleData.value.message:"")
     }

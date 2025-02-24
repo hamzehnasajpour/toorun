@@ -10,7 +10,7 @@ Window {
     property int maxTextBufferSize: 10240
 //    visibility: Window.Maximized
     property string applicationVersion : "1.0"
-    property string applicationName: "Si-o-se Pol (33 arches)"
+    property string applicationName: "TooRun"
 
     function appendToReceived(message, textObject, showAsHex) {
         var text = Qt.formatDateTime(new Date(), "yyyyMMdd hh:mm:ss") +

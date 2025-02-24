@@ -6,6 +6,7 @@ import QtQuick.Layouts 1.1
 
 GwWindow {
     title: qsTr("MQTT Publisher/Subscriber")
+    
     ColumnLayout {
         x: 5
         y: 5

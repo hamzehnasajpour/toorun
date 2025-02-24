@@ -7,7 +7,7 @@ ApplicationWindow {
     id: mainWindow
     visible: true
     property string applicationVersion : "1.0"
-    property string applicationName: "Si-o-se Pol (33 arches)"
+    property string applicationName: "TooRun"
 
     title: applicationName + " - (" + applicationVersion + ")"
     width: 640
