@@ -9,7 +9,9 @@
         <file>qml/main.qml</file>
         <file>qml/TreeDelegate.qml</file>
         <file>qml/udp.qml</file>
-        <file>images/siosepol.svg</file>
+        <file>qml/tcp.qml</file>
         <file>qml/UdpTcpWindow.qml</file>
+
+        <file>images/siosepol.svg</file>
     </qresource>
 </RCC>
