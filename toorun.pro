@@ -1,5 +1,5 @@
 TEMPLATE = app
-
+TARGET = TooRun
 QT += qml quick network svg
 #QT += websockets
 
