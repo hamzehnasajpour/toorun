@@ -23,6 +23,7 @@ GwWindow {
                 sendButton.enabled=false;
                 connectionButton.text="Connect";
                 if (socket.status == WebSocket.Error) {
+                    resetTimer.start();
                     console.log("Error: " + socket.errorString)
                 } else if (socket.status == WebSocket.Closed) {
                     console.log("Socket closed")
@@ -30,7 +31,7 @@ GwWindow {
             }
         }
         onErrorStringChanged: {
-            console.log("websocketclient onStatusChanged:" + errorString)
+            console.log("websocketclient onErrorStringChanged:" + errorString)
         }
         active: true
     }
@@ -71,7 +72,7 @@ GwWindow {
                 onClicked: {
                     socket.url = ipField.text;
                     if(socket.status == WebSocket.Open)
-                        socket.active = !socket.active;
+                        socket.active = false;
                     else
                         socket.active = true;
                 }
